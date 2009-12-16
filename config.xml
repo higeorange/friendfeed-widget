@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget>
+    <widgetname>FriendFeed</widgetname>
+    <description>
+        Opera Widgets for FriendFeed
+    </description>
+    <width>400</width>
+    <height>400</height>
+    <author>
+        <name>higeorange</name>
+        <link>http://opera.higeorange.com/</link>
+    </author>
+</widget>
+

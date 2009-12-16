@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>FriendFeed</title>
+	<link rel="stylesheet" href="friendfeed.css" type="text/css">
+    </head>
+    <body>
+	    <div id="header">
+		    <h1></h1>
+		    <ul id="controll">
+			    <li></li>
+			    <li><button type="button" id="reload"></button></li>
+			    <li><button type="button" id="config"></button></li>
+			    <li><button type="button" id="close"></button></li>
+		    </ul>
+	    </div>
+	    <ul id="feed_list">
+	    </ul>
+	    <div id="footer">
+		    <p id="message"></p>
+		    <p><a href="http://friendfeed.com">FriendFeed</a></p>
+	    </div>
+	    <div id="config_input">
+		    <dl>
+			    <dt>Username</dt>
+			    <dd><input type="text" id="username"></dd>
+			    <dt>Type</dt>
+			    <dd><select id="feed_type">
+				    <option value="friend">Friend feed</option>
+				    <option value="my">My feed</option>
+			    </select></dd>
+		    </dl>
+		    <p><button type="button" id="save">save</button></p>
+	    </div>
+	    <script type="text/javascript" src="js/jquery.js"></script>
+	    <script type="text/javascript" src="js/lib.js"></script>
+	    <script type="text/javascript" src="js/friendfeed.js"></script>
+    </body>
+</html>
+
