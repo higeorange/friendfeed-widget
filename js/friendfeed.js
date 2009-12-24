@@ -19,11 +19,7 @@ FriendFeed.init_event = function() {
 
     $('#reload').click(function() { self.reload(); });
     $('#config').click(function() {
-        if(self.c_flag) {
-            self.hide_input();
-        } else {
-            self.show_input();
-        }
+        self.toggle_config();
     });
     $('#close').click(function() { window.close(); });
     $('#save').click(function() { self.save_config(); });
@@ -36,19 +32,19 @@ FriendFeed.load_config = function() {
     $('option[value=' + this.feed_type + ']').attr('selected', 'selected');
 
     if(! this.username || ! this.feed_type) {
-        this.show_input();
+        this.toggle_config();
     } else {
         this.load_feed();
     }
 }
 
 FriendFeed.save_config = function(e, form) {
-    this.username = $('#username').val()
+    this.username = $('#username').val();
     widget.setPreferenceForKey( this.username, 'username');
     this.feed_type = $('#feed_type').val();
     widget.setPreferenceForKey( this.feed_type, 'feed_type');
 
-    this.hide_input();
+    this.toggle_config();
     this.load_config();
 }
 
@@ -56,6 +52,7 @@ FriendFeed.reload = function() {
     this.load_feed();
 }
 
+//JSONP
 FriendFeed.load_feed = function() {
     var url = this.feed_url + this.username;
     if(this.feed_type == 'friend') url += '/friends'
@@ -149,17 +146,17 @@ FriendFeed.load_thumbnail = function(media) {
             '</a>'
         '</li>'
     ].join('');
-}
+};
 
-FriendFeed.show_input = function() {
-    this.c_flag = true;
-    this.config_input.show();
-}
-
-FriendFeed.hide_input = function() {
-    this.c_flag = false;
-    this.config_input.hide();
-}
+FriendFeed.toggle_config = function() {
+    if(this.c_flag) {
+        this.config_input.hide();
+        this.c_flag = false;
+    } else {
+        this.config_input.show();
+        this.c_flag = true;
+    }
+};
 
 function load_feed(data) {
     FriendFeed.load_html(data);
