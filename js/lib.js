@@ -10,14 +10,11 @@ function createHTML(text) {
     var text = text.replace(/&amp;/g, "&");
     return text.replace(
         /((https?|ftp)(:\/\/[-_.!~*\'a-zA-Z0-9;\/?:\@&=+\$,\%#]+))/g,
-//            /(https?|ftp)(:\/\/[^\s\(\)]+)/g,
         function($0){
-            // <, > が URL に含まれてしまう問題の解決。
             var tmp = $0.split(/(&gt;|&lt;)/);
             var url = tmp.shift();
             var aft = tmp.join("");
 
-// security violation が出るので一時解除
 //            if(url.indexOf('http://tinyurl.com/') == 0
 //                || url.indexOf('http://z.la/') == 0
 //                || url.indexOf('http://ff.im/') == 0) {
@@ -35,9 +32,8 @@ function createHTML(text) {
 //        }
 //    });
 };
-// Tinyurl 展開: 1つに付き about 600ms
+
 function resolveTinyUrl(url) {
-    log(url);
     var exURL;
     var xhr = new XMLHttpRequest();
         xhr.open('HEAD', url, false);
@@ -50,13 +46,12 @@ function resolveTinyUrl(url) {
     return exURL || url;
 };
 
-// 2つ以上のクラスがつく可能性がある場合
 var appendClass = function(elm, _class) {
     elm.className += elm.className ? " " + _class : _class;
 }
 
 //Widget
-var Widget = {}
+var Widget = {};
     Widget.setValue = function(value, key) {
         var vals = ""
         switch(value.constructor) {
@@ -83,15 +78,15 @@ var Widget = {}
                 case 'Array':
                     return value.split(',');
                     break;
-				case 'Boolean':
-					return value == 'true' ? true : false;
+                case 'Boolean':
+                    return value == 'true' ? true : false;
                 default:
                     break;
             }
         } else {
             return value;
         }
-    }
+    };
 
 // Array
 Array.prototype.map = function(callback, thisObject) {
@@ -108,7 +103,7 @@ Array.prototype.indexOf = function(obj) {
         }
     }
     return -1;
-}
+};
 
 Array.prototype.contains = function(obj) {
     for(var i = 0, len = this.length;i < len; i++) {
@@ -117,7 +112,8 @@ Array.prototype.contains = function(obj) {
         }
     }
     return false;
-}
+};
+
 Array.prototype.del = function(obj) {
     var len = this.length;
     var r = new Array(len - 1);
@@ -127,7 +123,7 @@ Array.prototype.del = function(obj) {
         }
     }
     return r;
-}
+};
 
 function setCaretPosition(ctrl, pos) {
     if(ctrl.setSelectionRange) {
@@ -142,19 +138,6 @@ function setCaretPosition(ctrl, pos) {
         range.select();
     }
 }
-
-//
-// TransURI (UTF-8): transURI.js (Ver.041211)
-//
-// Copyright (C) http://nurucom-archives.hp.infoseek.co.jp/digital/
-//
-
-var DecodeURI=function(str){
-	return str.replace(/%(E(0%[AB]|[1-CEF]%[89AB]|D%[89])[0-9A-F]|C[2-9A-F]|D[0-9A-F])%[89AB][0-9A-F]|%[0-7][0-9A-F]/ig,function(s){
-		var c=parseInt(s.substring(1),16);
-		return String.fromCharCode(c<128?c:c<224?(c&31)<<6|parseInt(s.substring(4),16)&63:((c&15)<<6|parseInt(s.substring(4),16)&63)<<6|parseInt(s.substring(7),16)&63)
-	})
-};
 
 function strftime(date_string, format) {
     var datetime_regexp =  /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})Z/;
